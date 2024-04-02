@@ -11,15 +11,21 @@
 
 <table><tr><td>
 
-### ⚠️ This plugin is experimental and relies on style queries (via container queries), which are not yet widely supported in browsers.
+### ⚠️ This plugin is experimental and relies on [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries), which are not yet widely supported in browsers.
 
 See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) for more information.
 
+The good news is that Safari and Firefox, the browsers lacking support, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
+
 </td></tr></table>
 
-Signals for Tailwind CSS is a plugin that utilizes style queries (via container queries) to reactively enable a custom state, which can then be consumed by any descendants in the DOM.
+Signals for Tailwind CSS is a plugin that utilizes [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries) to reactively enable a custom state, which can then be consumed by any of its descendants in the DOM.
 
-This shares some similarities to the existing `group` variants and utility in that both provide methods for styling elements based on their ancestors's state. Unlike with group states, signal states can be explicitly signaled, allowing their state to be inherited with a single, simple, unchained variant. This reduces the developer's effort and need to compose a chain of variants, improving the developer experience with a more declarative API.
+`signal` is similar to the existing `group` variant/utility in that both provide methods for styling elements based on their ancestors' state. Unlike `group` states, however, signal states can be explicitly signaled, allowing their state to be both set and consumed with a single, simple, unchained variant.
+
+This reduces development effort and the need to compose a chain of variants, improving the developer experience with a more declarative API.
+
+Depending on your use case, a traditional `group` may make more sense, but often, particularly when managing a parent or ancestor state with anything more complex than a simple `peer-X` or `group-X`, a `signal` may be a simpler option.
 
 ## Installation
 
@@ -45,33 +51,97 @@ The plugin introduces the `signal` variant, which can be used to apply styles ba
 
 Here's an example comparing the traditional approach with the new signals approach:
 
-#### Without Signals
+<table><tr></tr><tr><td>
+
+#### Example: Without Signals
 ```html
 <input type="checkbox" class="peer" /> 👈🏼 check/uncheck here
 <div class="hover:[&>div]:bg-green-800 peer-checked:[&>div]:bg-green-800">
   <div class="bg-red-800 p-1 text-white">or hover here</div>
 </div>
 ```
-Tailwind Play: https://play.tailwindcss.com/E3ig9SPTsc
+Open this example in Tailwind Play: https://play.tailwindcss.com/E3ig9SPTsc
 
-#### With Signals
+</td></tr><tr></tr><tr><td>
+
+#### Example: With Signals
 ```html
 <input type="checkbox" class="peer" /> 👈🏼 check/uncheck here
 <div class="peer-checked:signal hover:signal">
   <div class="signal:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
 </div>
 ```
-Tailwind Play: https://play.tailwindcss.com/weFkMf4U5K
+Open this example in Tailwind Play: https://play.tailwindcss.com/weFkMf4U5K
 
-Notice how, with signals, we don't have to use any arbitrary selector variants like `[&>div]` and can instead apply those styles dorectly to the targeted descendants, also allowing us to consolidate some redundancy in the parent, so that whatever condition(s) activate the signal only need to be specified once, rather than once per style/utility.
+</td></tr></table>
 
-This is part of the beauty of Signals for Tailwind CSS — a declarative API.
+Notice how, with signals, we don't have to use any arbitrary selector variants like `[&>div]` and can instead apply those styles directly to the targeted descendants. This allows us to consolidate some redundancy in the parent so that whatever condition activates the signal only needs to be specified once rather than once per style/utility.
 
-> The example above is simple for the sake of example, but the benefits of Signals for Tailwind CSS become more apparent as the complexity of your styles and conditions increase.
+The benefits of Signals for Tailwind CSS become more apparent as the complexity of your styles and conditions increase.
+
+### Activating a `signal` based on a descendant condition
+
+The general purpose of this plugin is to provide a declarative approach to applying styles based on an _**ancestor's**_ state.
+
+However, thanks to the power of the [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) CSS pseudo-class, we can even activate a signal based on a _**descendant's**_ state.
+
+<table><tr></tr><tr><td>
+
+#### Example: Descendant condition
+```html
+<div class="has-[:checked]:signal">
+  <input type="checkbox" /> 👈🏼 check/uncheck here
+  <div class="signal:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
+</div>
+```
+Open this example in Tailwind Play: https://play.tailwindcss.com/PCQb1CXGrO
+
+</td></tr></table>
+
+This is most useful for situations where you want to apply styles to an entire block based on the current state of one of its descendants.
+
+Here are a few examples of cases where such a feature might be useful:
+* Activating a signal based on the presence or visibility of a specific child element
+* Activating a signal on a form based on the validity of one or more of its descendant form fields
+* Activating a signal when a specific descendant element is focused or hovered
+* Activating a signal based on the presence of a specific class on a descendant element
+* and many more!
+
+⚠️ Some cautions:
+* Watch out for circularity issues. If you set up a signal that activates based on a descendant's state, and that descendant's state is also based on the signal, you may run into issues.
+* In some cases, if you want to check if **any** descendant is focused, for example, you may not need `:has()` and could use a simpler pseudo-class variant such as…
+  * `focus-within:signal` instead of `has-[:focus]:signal`
+  * `valid:signal` instead of `has-[:valid]:signal` (for a `form`, which checks if all form contents are valid)
+* This is a bit less declarative when you use `:has()`, but for use cases where you would need it, it would likely still be simpler than the alternative.
+
+### Differentiating signals
+
+When using multiple signals, you may run into situations where you want one signal nested in another, which could cause issues. In that case, you can distinguish signals apart by naming them using the modifier syntax built into Tailwind CSS, the same naming convention used for `group` and `peer` variants.
+
+
+<table><tr></tr><tr><td>
+
+#### Example: Naming a signal
+```html
+<input type="checkbox" class="peer/checkable origin-bottom-left" /> 👈🏼 check/uncheck here
+<div class="peer/hoverable bg-slate-700 text-white">✨ hover/unhover here ✨</div>
+<div class="active:signal/custom peer-checked/checkable:signal peer-hover/hoverable:signal">
+  <div class="bg-red-800 text-white after:content-['_👀'] signal/custom:!bg-purple-800 signal:bg-green-800 signal/custom:after:!content-['_🦄'] signal:after:content-['_😱']">press me</div>
+</div>
+```
+Open this example in Tailwind Play: https://play.tailwindcss.com/MkWvEuaWtO
+
+</td></tr></table>
+
+By giving a signal a name, you can ensure it is unique and doesn't conflict with other signals. You can name a signal by adding a slash and the name after the `signal` variant, like `signal/{name}`.
+
+Consuming a named signal is the same as consuming a regular signal, but with the name appended to the variant: `signal/{name}`.
+
+<i><small>For more information on this modifier syntax, see [Diffrentiating peers](https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers) from the official Tailwind CS documentation.</small></i>
 
 ## Why use Signals for Tailwind CSS?
 
-Signals for Tailwind CSS provides a more declarative and straightforward approach to applying styles based on an ancestor's state. By leveraging style queries (via container queries), it eliminates the need for complex selector chaining and arbitrary targeting, resulting in a cleaner and more maintainable codebase.
+Signals for Tailwind CSS provides a more declarative and straightforward approach to applying styles based on an ancestor's state. Leveraging style queries (via container queries) eliminates the need for complex selector chaining and arbitrary targeting, resulting in a cleaner and more maintainable codebase.
 
 This plugin is particularly useful for:
 
@@ -81,9 +151,9 @@ This plugin is particularly useful for:
 
 ## Why NOT use Signals for Tailwind CSS?
 
-**⚠️ Browser support for style queries is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility.**
+**⚠️ Browser support for [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility.**
 
-The good news is both browsers lacking support, Safari and Firefox, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
+The good news is that Safari and Firefox, the browsers lacking support, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
 
 
 ---
@@ -96,4 +166,4 @@ If you liked this, you might also like my other Tailwind CSS plugins:
 * [tailwindcss-jstool](https://github.com/brandonmcconnell/tailwindcss-jstool): Effortless build-time JS script injection
 * [tailwindcss-directional-shadows](https://github.com/brandonmcconnell/tailwindcss-directional-shadows): Supercharge your shadow utilities with added directional support (includes directional `shadow-border` utilities too ✨)
 * [tailwindcss-default-shades](https://github.com/brandonmcconnell/tailwindcss-default-shades): Default shades for simpler color utility classes
-* [tailwind-lerp-colors](https://github.com/brandonmcconnell/tailwind-lerp-colors): Expand your color horizons and take the fuss out of genertaing new—or expanding existing—color palettes
+* [tailwind-lerp-colors](https://github.com/brandonmcconnell/tailwind-lerp-colors): Expand your color horizons and take the fuss out of generating new—or expanding existing—color palettes
