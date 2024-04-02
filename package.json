@@ -13,7 +13,14 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:clean": "rm -rf ./dist",
+    "compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "build": "npm-run-all build:clean compile",
+    "watch:cjs": "tsc --watch -p tsconfig.cjs.json",
+    "watch:esm": "tsc --watch -p tsconfig.esm.json",
+    "watch:types": "tsc --watch -p tsconfig.types.json",
+    "watch": "npm-run-all --parallel watch:cjs watch:esm watch:types"
   },
   "repository": {
     "type": "git",
@@ -38,9 +45,17 @@
   },
   "homepage": "https://github.com/brandonmcconnell/tailwindcss-signals#readme",
   "dependencies": {
+    "@types/node": "^20.4.1",
     "tailwindcss": "^3.0.2"
   },
   "devDependencies": {
-    "@types/tailwindcss": "^3.0.2"
+    "@types/tailwindcss": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0-alpha.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.1.6"
   }
 }
