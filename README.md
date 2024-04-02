@@ -75,7 +75,9 @@ This plugin is particularly useful for:
 
 ## Why NOT use Signals for Tailwind CSS?
 
-⚠️ Browser support for style queries is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility. The good news is both browsers lacking support, Safari and Firefox, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
+**⚠️ Browser support for style queries is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility.**
+
+The good news is both browsers lacking support, Safari and Firefox, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
 
 
 ---
