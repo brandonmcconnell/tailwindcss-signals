@@ -11,13 +11,13 @@
 
 <table><tr><td>
 
-### ⚠️ This plugin is experimental and relies on style queries (container queries), which are not yet widely supported in browsers.
+### ⚠️ This plugin is experimental and relies on style queries (via container queries), which are not yet widely supported in browsers.
 
 See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) for more information.
 
 </td></tr></table>
 
-Signals for Tailwind CSS is a plugin that utilizes style queries (container queries) to reactively enable a custom state, which can then be consumed by any descendants in the DOM.
+Signals for Tailwind CSS is a plugin that utilizes style queries (via container queries) to reactively enable a custom state, which can then be consumed by any descendants in the DOM.
 
 This shares some similarities to the existing `group` variants and utility in that both provide methods for styling elements based on their ancestors's state. Unlike with group states, signal states can be explicitly signaled, allowing their state to be inherited with a single, simple, unchained variant. This reduces the developer's effort and need to compose a chain of variants, improving the developer experience with a more declarative API.
 
@@ -71,7 +71,7 @@ This is part of the beauty of Signals for Tailwind CSS — a declarative API.
 
 ## Why use Signals for Tailwind CSS?
 
-Signals for Tailwind CSS provides a more declarative and straightforward approach to applying styles based on an ancestor's state. By leveraging style queries (container queries), it eliminates the need for complex selector chaining and arbitrary targeting, resulting in a cleaner and more maintainable codebase.
+Signals for Tailwind CSS provides a more declarative and straightforward approach to applying styles based on an ancestor's state. By leveraging style queries (via container queries), it eliminates the need for complex selector chaining and arbitrary targeting, resulting in a cleaner and more maintainable codebase.
 
 This plugin is particularly useful for:
 
