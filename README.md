@@ -11,15 +11,15 @@
 
 <table><tr></tr><tr><td>
 
-### ⚠️ This plugin is experimental and relies on [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries), which are not yet widely supported in browsers.
-
-See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) for more information.
+### ⚠️ This plugin is experimental and relies on [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries_2) (via container queries), which are not yet widely supported in browsers.
 
 The good news is that Safari and Firefox, the browsers lacking support, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
 
+See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) or [caniuse](https://caniuse.com/css-container-queries-style) for more information.
+
 <br></td></tr></table>
 
-Signals for Tailwind CSS is a plugin that utilizes [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries) to reactively enable a custom state, which can then be consumed by any of its descendants in the DOM.
+Signals for Tailwind CSS is a plugin that utilizes [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries_2) (via container queries) to reactively enable a custom state, which can then be consumed by any of its descendants in the DOM.
 
 `signal` is similar to the existing `group` variant/utility in that both provide methods for styling elements based on their ancestors' state. Unlike `group` states, however, signal states can be explicitly signaled, allowing their state to be both set and consumed with a single, simple, unchained variant.
 
@@ -156,9 +156,11 @@ This plugin is particularly useful for:
 
 ## Why NOT use Signals for Tailwind CSS?
 
-**⚠️ Browser support for [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility.**
+**⚠️ Browser support for [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries_2) is still limited, so Signals for Tailwind CSS may not be suitable for projects that require broad compatibility.**
 
 The good news is that Safari and Firefox, the browsers lacking support, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
+
+See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) or [caniuse](https://caniuse.com/css-container-queries-style) for more information.
 
 
 ---
