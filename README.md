@@ -9,7 +9,7 @@
 
 </div>
 
-<table><tr><td>
+<table><tr></tr><tr><td>
 
 ### ⚠️ This plugin is experimental and relies on [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries), which are not yet widely supported in browsers.
 
