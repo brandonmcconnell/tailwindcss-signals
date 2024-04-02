@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-signals",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Grouped utility support for Tailwind CSS",
   "main": "./dist/cjs/index.js",
   "files": [
