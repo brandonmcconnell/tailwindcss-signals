@@ -1,0 +1,46 @@
+{
+  "name": "tailwindcss-signals",
+  "version": "0.0.1",
+  "description": "Grouped utility support for Tailwind CSS",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonmcconnell/tailwindcss-signals.git"
+  },
+  "keywords": [
+    "css",
+    "utility-classes",
+    "group",
+    "groups",
+    "grouping",
+    "signals",
+    "plugin",
+    "plugins",
+    "tailwind",
+    "tailwindcss"
+  ],
+  "author": "Brandon McConnell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandonmcconnell/tailwindcss-signals/issues"
+  },
+  "homepage": "https://github.com/brandonmcconnell/tailwindcss-signals#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/tailwindcss": "^3.0.2"
+  }
+}
