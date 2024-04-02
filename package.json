@@ -2,16 +2,15 @@
   "name": "tailwindcss-signals",
   "version": "0.0.2",
   "description": "Grouped utility support for Tailwind CSS",
-  "main": "index.js",
+  "main": "./dist/cjs/index.js",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
-  "prettier": {
-    "printWidth": 120,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
+  "type": "commonjs",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:clean": "rm -rf ./dist",
