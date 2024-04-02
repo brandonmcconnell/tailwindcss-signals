@@ -126,7 +126,12 @@ When using multiple signals, you may run into situations where you want one sign
 <input type="checkbox" class="peer/checkable origin-bottom-left" /> 👈🏼 check/uncheck here
 <div class="peer/hoverable bg-slate-700 text-white">✨ hover/unhover here ✨</div>
 <div class="active:signal/custom peer-checked/checkable:signal peer-hover/hoverable:signal">
-  <div class="bg-red-800 text-white after:content-['_👀'] signal/custom:!bg-purple-800 signal:bg-green-800 signal/custom:after:!content-['_🦄'] signal:after:content-['_😱']">press me</div>
+  <div class="
+    text-white
+    bg-red-800 after:content-['_👀']
+    signal/custom:!bg-purple-800 signal:bg-green-800
+    signal/custom:after:!content-['_🦄'] signal:after:content-['_😱']
+  ">press me</div>
 </div>
 ```
 Open this example in Tailwind Play: https://play.tailwindcss.com/MkWvEuaWtO
