@@ -9,7 +9,13 @@
 
 </div>
 
-⚠️ **This plugin is experimental and relies on style queries (container queries), which are not yet widely supported in browsers.** See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) for more information.
+<table><tr><td>
+
+### ⚠️ This plugin is experimental and relies on style queries (container queries), which are not yet widely supported in browsers.
+
+See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#browser_compatibility) for more information.
+
+</td></tr></table>
 
 Signals for Tailwind CSS is a plugin that utilizes style queries (container queries) to reactively enable a custom state, which can then be consumed by any descendants in the DOM.
 
