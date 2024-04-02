@@ -17,7 +17,7 @@ See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US
 
 The good news is that Safari and Firefox, the browsers lacking support, have already begun implementing style queries in their development versions, so it's only a matter of time before they're widely available.
 
-</td></tr></table>
+<br><br></td></tr></table>
 
 Signals for Tailwind CSS is a plugin that utilizes [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) (via container queries) to reactively enable a custom state, which can then be consumed by any of its descendants in the DOM.
 
@@ -62,7 +62,7 @@ Here's an example comparing the traditional approach with the new signals approa
 ```
 Open this example in Tailwind Play: https://play.tailwindcss.com/E3ig9SPTsc
 
-</td></tr><tr></tr><tr><td>
+<br><br></td></tr><tr></tr><tr><td>
 
 #### Example: With Signals
 ```html
@@ -73,7 +73,7 @@ Open this example in Tailwind Play: https://play.tailwindcss.com/E3ig9SPTsc
 ```
 Open this example in Tailwind Play: https://play.tailwindcss.com/weFkMf4U5K
 
-</td></tr></table>
+<br><br></td></tr></table>
 
 Notice how, with signals, we don't have to use any arbitrary selector variants like `[&>div]` and can instead apply those styles directly to the targeted descendants. This allows us to consolidate some redundancy in the parent so that whatever condition activates the signal only needs to be specified once rather than once per style/utility.
 
@@ -96,7 +96,7 @@ However, thanks to the power of the [`:has()`](https://developer.mozilla.org/en-
 ```
 Open this example in Tailwind Play: https://play.tailwindcss.com/PCQb1CXGrO
 
-</td></tr></table>
+<br><br></td></tr></table>
 
 This is most useful for situations where you want to apply styles to an entire block based on the current state of one of its descendants.
 
@@ -131,7 +131,7 @@ When using multiple signals, you may run into situations where you want one sign
 ```
 Open this example in Tailwind Play: https://play.tailwindcss.com/MkWvEuaWtO
 
-</td></tr></table>
+<br><br></td></tr></table>
 
 By giving a signal a name, you can ensure it is unique and doesn't conflict with other signals. You can name a signal by adding a slash and the name after the `signal` variant, like `signal/{name}`.
 
