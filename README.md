@@ -137,7 +137,7 @@ By giving a signal a name, you can ensure it is unique and doesn't conflict with
 
 Consuming a named signal is the same as consuming a regular signal, but with the name appended to the variant: `signal/{name}`.
 
-<i><small>For more information on this modifier syntax, see [Diffrentiating peers](https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers) from the official Tailwind CS documentation.</small></i>
+<i><small>For more information on this modifier syntax, see [Differentiating peers](https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers) from the official Tailwind CS documentation.</small></i>
 
 ## Why use Signals for Tailwind CSS?
 
