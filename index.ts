@@ -20,7 +20,7 @@ const signals = plugin(({ matchUtilities, matchVariant, theme }) => {
   );
 
   matchVariant(
-    'signal',
+    'effect',
     (_, { modifier }) => {
       return `@container style(${getStyleVarName(modifier)}: true)`;
     },
