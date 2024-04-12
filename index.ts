@@ -4,7 +4,7 @@ const getStyleVarName = (modifier: string | null) => `--tw-signal${modifier ? `_
 // using empty values here so the compiler plays nice and generates the styles without values
 const EMPTY_VALUES = { values: { DEFAULT: '' } };
 
-const signals = plugin(({ matchUtilities, matchVariant, theme }) => {
+const signals = plugin(({ matchUtilities, matchVariant }) => {
   matchUtilities(
     {
       signal: (_, { modifier }) => {
