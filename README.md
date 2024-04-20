@@ -19,13 +19,77 @@ See the browser compatibility table on [MDN](https://developer.mozilla.org/en-US
 
 <br></td></tr></table>
 
-Signals for Tailwind CSS is a plugin that utilizes [style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries_2) (via container queries) to reactively enable a custom state, which can then be consumed by any of its descendants in the DOM.
+Signals for Tailwind CSS is similar to [signals in JavaScript](https://github.com/proposal-signals/proposal-signals): it lets you set state on an element, then automatically apply styles to another element when state changes.
 
-`signal` is similar to the existing `group` variant/utility in that both provide methods for styling elements based on their ancestors' state. Unlike `group` states, however, signal states can be explicitly signaled, allowing their state to be both set and consumed with a single, simple, unchained variant.
+```html
+<!-- When the parent is hovered, turn the signal on -->
+<div class="hover:signal">
+  <div class="h-8 p-1 bg-gray-200">
+    hover here
+  </div>
+  <!--
+    In the descendant, schedule an effect that applies
+    `bg-green-800` when the signal is on
+  -->
+  <div class="effect:bg-green-800 bg-red-800 p-1 text-white">
+    or hover here
+  </div>
+</div>
+```
 
-This reduces development effort and the need to compose a chain of variants, improving the developer experience with a more declarative API.
+Open this example in Tailwind Play: https://play.tailwindcss.com/8VR9e91Wud
 
-Depending on your use case, a traditional `group` may make more sense, but often, particularly when managing a parent or ancestor state with anything more complex than a simple `peer-X` or `group-X`, a `signal` may be a simpler option.
+You can also use Tailwind modifiers to name your signals, and you can use those names in effects:
+
+```html
+<div class="hover:signal/one active:signal/two">
+  <div class="h-8 bg-gray-200 p-1">hover/press here</div>
+  <div class="bg-red-800 p-1 text-white effect/one:bg-green-800 effect/two:bg-blue-800">or hover/press here</div>
+</div>
+```
+
+Open this example in Tailwind Play: https://play.tailwindcss.com/1oOaup99Yi
+
+Under the hood, Tailwind Signals uses [container style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries_2) to read parent state and apply style.
+
+## Comparison with `group`
+ 
+`signal` and `effect` are similar to the existing `group` utility and `group-<state>` variants, in that both provide methods for styling elements based on their ancestors' state.
+
+Unlike `group-<state>` variants, however, the `effect` variant only increases selector specificity by one point. Also, `effect` allows your child element to be more agnostic about what user action is causing the state change.
+
+Compare and contrast these two examples:
+
+```html
+<!-- GROUP -->
+<button class="group">
+  <!--
+    When the parent is hovered or focused, apply a green
+    background, using a class with 3 specificity points.
+  -->
+  <span class="
+    group-hover:bg-green-800
+    group-focus:bg-green-800
+    bg-red-800 p-1 text-white
+  ">...</span>
+</button>
+
+<!-- SIGNALS -->
+<div class="hover:signal focus:signal">
+  <!--
+    When the parent turns the signal on for any reason,
+    apply a green background, using a class with only
+    2 specificity points.
+  -->
+  <span class="
+    effect:bg-green-800
+    bg-red-800 p-1 text-white
+  ">...</span>
+</button>
+```
+
+Open this example in Tailwind Play: https://play.tailwindcss.com/cQIQ9lHRTI
+
 
 ## Installation
 
@@ -47,7 +111,7 @@ module.exports = {
 
 ## Usage
 
-The plugin introduces the `signal` variant, which can be used to apply styles based on an ancestor's signaled state.
+The plugin introduces the `signal` utility, which can be used to track changes to an ancestor's state. It also adds an `effect` variant, which will apply styles based on the state of a `signal`.
 
 Here's an example comparing the traditional approach with the new signals approach:
 
@@ -68,10 +132,10 @@ Open this example in Tailwind Play: https://play.tailwindcss.com/E3ig9SPTsc
 ```html
 <input type="checkbox" class="peer" /> 👈🏼 check/uncheck here
 <div class="peer-checked:signal hover:signal">
-  <div class="signal:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
+  <div class="effect:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
 </div>
 ```
-Open this example in Tailwind Play: https://play.tailwindcss.com/weFkMf4U5K
+Open this example in Tailwind Play: https://play.tailwindcss.com/TilHSzunPd
 
 <br></td></tr></table>
 
@@ -91,10 +155,10 @@ However, thanks to the power of the [`:has()`](https://developer.mozilla.org/en-
 ```html
 <div class="has-[:checked]:signal">
   <input type="checkbox" /> 👈🏼 check/uncheck here
-  <div class="signal:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
+  <div class="effect:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
 </div>
 ```
-Open this example in Tailwind Play: https://play.tailwindcss.com/PCQb1CXGrO
+Open this example in Tailwind Play: https://play.tailwindcss.com/n63tOohmf3
 
 <br></td></tr></table>
 
@@ -129,18 +193,18 @@ When using multiple signals, you may run into situations where you want one sign
   <div class="
     text-white
     bg-red-800 after:content-['_👀']
-    signal/custom:!bg-purple-800 signal:bg-green-800
-    signal/custom:after:!content-['_🦄'] signal:after:content-['_😱']
+    effect/custom:!bg-purple-800 effect:bg-green-800
+    effect/custom:after:!content-['_🦄'] effect:after:content-['_😱']
   ">press me</div>
 </div>
 ```
-Open this example in Tailwind Play: https://play.tailwindcss.com/MkWvEuaWtO
+Open this example in Tailwind Play: https://play.tailwindcss.com/KlIdAUckz6
 
 <br></td></tr></table>
 
-By giving a signal a name, you can ensure it is unique and doesn't conflict with other signals. You can name a signal by adding a slash and the name after the `signal` variant, like `signal/{name}`.
+By giving a signal a name, you can ensure it is unique and doesn't conflict with other signals.
 
-Consuming a named signal is the same as consuming a regular signal, but with the name appended to the variant: `signal/{name}`.
+Consuming a named signal is the same as consuming a regular signal, but with the name appended to the variant: `effect/{name}`.
 
 <i><small>For more information on this modifier syntax, see [Differentiating peers](https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers) from the official Tailwind CS documentation.</small></i>
 
