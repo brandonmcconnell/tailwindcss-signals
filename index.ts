@@ -28,4 +28,4 @@ const signals = plugin(({ matchUtilities, matchVariant }) => {
   );
 });
 
-export default signals;
+module.exports = signals;

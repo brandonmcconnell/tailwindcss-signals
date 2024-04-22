@@ -22,4 +22,4 @@ const signals = (0, plugin_1.default)(({ matchUtilities, matchVariant }) => {
         return `@container style(${getStyleVarName(modifier)}: true)`;
     }, EMPTY_VALUES);
 });
-exports.default = signals;
+module.exports = signals;

@@ -17,4 +17,4 @@ const signals = plugin(({ matchUtilities, matchVariant }) => {
         return `@container style(${getStyleVarName(modifier)}: true)`;
     }, EMPTY_VALUES);
 });
-export default signals;
+module.exports = signals;
