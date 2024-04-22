@@ -89,12 +89,12 @@ However, thanks to the power of the [`:has()`](https://developer.mozilla.org/en-
 
 #### Example: Descendant condition
 ```html
-<div class="has-[:checked]:signal">
+<div class="has-[:is(input:checked,div:hover)]:signal">
   <input type="checkbox" /> 👈🏼 check/uncheck here
-  <div class="signal:bg-green-800 bg-red-800 p-1 text-white">or hover here</div>
+  <div class="bg-red-800 p-1 text-white signal:bg-green-800">or hover here</div>
 </div>
 ```
-Open this example in Tailwind Play: https://play.tailwindcss.com/PCQb1CXGrO
+Open this example in Tailwind Play: https://play.tailwindcss.com/YnlzSITNqF
 
 <br></td></tr></table>
 
