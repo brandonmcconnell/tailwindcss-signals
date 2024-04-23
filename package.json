@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-signals",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Grouped utility support for Tailwind CSS",
   "type": "module",
   "source": "index.ts",
