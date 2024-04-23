@@ -1,4 +1,4 @@
-import plugin from 'tailwindcss/plugin';
+import plugin from 'tailwindcss/plugin.js';
 
 const getStyleVarName = (modifier: string | null) => `--tw-signal${modifier ? `_${modifier}` : ''}`;
 // using empty values here so the compiler plays nice and generates the styles without values
